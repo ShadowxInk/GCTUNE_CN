@@ -1,0 +1,40 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.poc.gctune.overlay.m3'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'com.poc.gctune.overlay.m3'
+        minSdk 26
+        targetSdk 34
+        versionCode 1
+        versionName '1.0'
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('../../poc_gcrce/poc.keystore')
+            storePassword 'android'
+            keyAlias 'gd'
+            keyPassword 'android'
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+        }
+        debug {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+        }
+    }
+
+    lint {
+        abortOnError false
+    }
+}

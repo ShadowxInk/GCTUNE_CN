@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- System Monet Colors mapping for Android Framework -->
+    <color name="system_control_activated_dark">@android:color/system_accent1_200</color>
+    <color name="system_control_activated_light">@android:color/system_accent1_600</color>
+    <color name="system_primary_container_dark">@android:color/system_accent1_700</color>
+    <color name="system_primary_container_light">@android:color/system_accent1_100</color>
+</resources>

@@ -1,0 +1,55 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.poc.gctune'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'com.poc.gctune'
+        minSdk 26
+        targetSdk 30
+        versionCode 17
+        versionName '1.2.6-zh'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('../../poc_gcrce/poc.keystore')
+            storePassword 'android'
+            keyAlias 'gd'
+            keyPassword 'android'
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+        }
+    }
+
+    lint {
+        disable 'ExpiredTargetSdkVersion'
+        abortOnError false
+    }
+}
+
+dependencies {
+    implementation 'com.google.android.material:material:1.13.0'
+    // FileProvider for sharing the diagnostic log (already pulled in by material,
+    // declared explicitly so the compile classpath never depends on that fact)
+    implementation 'androidx.core:core:1.13.1'
+}
