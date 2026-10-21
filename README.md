@@ -39,7 +39,7 @@ GC-Tune 的核心是借助 Game Cube 特权子系统建立的一条 IPC 通道�
 
 ### 1. 安装
 
-从 [Releases](https://github.com/Bebrazui/GC-Tune/releases/latest) 页面下载已签名的 APK，并安装到设备：
+从 [Releases](https://github.com/ShadowxInk/GCTUNE_CN/) 页面下载已签名的 APK，并安装到设备：
 
 ```bash
 adb install -r gctune-signed.apk
