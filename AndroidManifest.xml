@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.poc.gctune"
+    android:versionCode="10"
+    android:versionName="1.0">
+    <uses-sdk android:minSdkVersion="26" android:targetSdkVersion="30" />
+    <!-- QUERY_ALL_PACKAGES: without it Android hides third-party launchers apps
+         from queryIntentActivities and only system icons get recolored -->
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+    <!-- WRITE_SECURE_SETTINGS: granted via "adb shell pm grant"; the app flips
+         theme_icons_style_explore itself — running "settings put" inside the
+         uid1000 channel NPEs in AppOpsService (no calling package) -->
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
+    <!-- ChannelService: honest foreground notification while a command is
+         pending + a partial wake lock so retries survive doze. Nothing else. -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- lets the honest "command pending" notification be visible on 13+ -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- rest is zero permissions: everything privileged goes through the uid1000 channel -->
+    <application android:label="GC Tune">
+        <!-- first run: onboarding + jump into Game Cube settings -->
+        <activity android:name=".SetupActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Main" android:exported="true" />
+        <activity android:name=".ThemeActivity" android:exported="false" />
+        <activity android:name=".IconsActivity" android:exported="false" />
+        <activity android:name=".MiscActivity" android:exported="false" />
+        <activity android:name=".FontActivity" android:exported="false" />
+        <activity android:name=".PrefsActivity" android:exported="false" />
+        <!-- owns layer + ACK receiver + wake retries while a command is pending -->
+        <service android:name=".ChannelService" android:exported="false" />
+        <!-- "Неубиваемый фон": sticky foreground service (see KeepAliveService) -->
+        <service android:name=".KeepAliveService" android:exported="false" />
+        <!-- self-rescheduling watchdog alarm for the keep-alive chain -->
+        <receiver android:name=".KeepAliveReceiver" android:exported="false" />
+        <!-- ADB bridge: exported on purpose, but BridgeProvider.call() rejects
+             every uid except 2000 (adb shell) and 0 (root) per transaction -->
+        <provider
+            android:name=".BridgeProvider"
+            android:authorities="com.poc.gctune.bridge"
+            android:exported="true" />
+    </application>
+</manifest>
