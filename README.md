@@ -7,7 +7,7 @@
 
 面向 OriginOS 与 vivo 设备的高级系统调优工具与提权通道实现。GC-Tune 借助 Game Cube（电竞模式）的执行环境，以系统级权限（`uid 1000` / `system`）执行命令、安装自定义 `.itz` 主题，并直接把自定义图标包的着色效果应用到 OriginOS 桌面，全程无需 root。
 
-[下载最新版本](https://github.com/Bebrazui/GC-Tune/releases/latest) &bull; [快速开始](#快速开始) &bull; [功能特性](#功能特性) &bull; [构建](#构建)
+[下载最新版本](https://github.com/ShadowxInk/GCTUNE_CN/) &bull; [快速开始](#快速开始) &bull; [功能特性](#功能特性) &bull; [构建](#构建)
 
 ---
 
